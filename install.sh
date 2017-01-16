@@ -42,6 +42,7 @@ if [ ${OS}=Ubuntu ];then
 	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
 	./configure && make -j2 && make install
 	ldconfig
+	apt-get install language-pack-zh-hans -y
 fi
 if [ ${OS}=CentOS ];then
 	yum install python -y
