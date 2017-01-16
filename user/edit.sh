@@ -4,48 +4,48 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "1.Ê¹ÓÃÓÃ»§Ãû"
-echo "2.Ê¹ÓÃ¶Ë¿Ú"
+echo "1.ä½¿ç”¨ç”¨æˆ·å"
+echo "2.ä½¿ç”¨ç«¯å£"
 echo ""
 while :; do echo
-read -p "ÇëÑ¡Ôñ£º " lsid
+read -p "è¯·é€‰æ‹©ï¼š " lsid
 	if [[ ! $lsid =~ ^[1-2]$ ]]; then
-		echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+		echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 	else
 		break	
 	fi
 done
 if [[ $lsid == 1 ]];then
-	read -p "ÊäÈëÓÃ»§Ãû£º " uid
+	read -p "è¾“å…¥ç”¨æˆ·åï¼š " uid
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -l -u $uid
 fi
 if [[ $lsid == 2 ]];then
-	read -p "ÊäÈë¶Ë¿ÚºÅ£º " uid
+	read -p "è¾“å…¥ç«¯å£å·ï¼š " uid
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -l -p $uid
 fi
 
-echo "1.ĞŞ¸ÄÃÜÂë"
-echo "2.ĞŞ¸Ä¼ÓÃÜ"
-echo "3.ĞŞ¸ÄĞ­Òé"
-echo "4.ĞŞ¸Ä»ìÏı"
-echo "5.ĞŞ¸ÄĞ­Òé²ÎÊı"
-echo "6.ĞŞ¸Ä»ìÏı²ÎÊı"
-echo "7.ĞŞ¸ÄÁ÷Á¿"
-echo "8.ĞŞ¸Ä¶Ë¿ÚÏŞÖÆ"
+echo "1.ä¿®æ”¹å¯†ç "
+echo "2.ä¿®æ”¹åŠ å¯†"
+echo "3.ä¿®æ”¹åè®®"
+echo "4.ä¿®æ”¹æ··æ·†"
+echo "5.ä¿®æ”¹åè®®å‚æ•°"
+echo "6.ä¿®æ”¹æ··æ·†å‚æ•°"
+echo "7.ä¿®æ”¹æµé‡"
+echo "8.ä¿®æ”¹ç«¯å£é™åˆ¶"
 
 
-read -p "ÇëÑ¡Ôñ£º " ec
+read -p "è¯·é€‰æ‹©ï¼š " ec
 if [[ ! $ec =~ ^[1-8]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi
 done
 
 if [[ $ec == 1 ]];then
-	read -p "ÊäÈëÃÜÂë£º " upass
+	read -p "è¾“å…¥å¯†ç ï¼š " upass
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
@@ -57,16 +57,16 @@ if [[ $ec == 1 ]];then
 	fi
 fi
 if [[ $ec == 2 ]];then
-	echo "¼ÓÃÜ·½Ê½"
+	echo "åŠ å¯†æ–¹å¼"
 	echo '1.chacha20'
 	echo '2.aes-128-cfb'
 	echo '3.aes-256-cfb'
 	echo '4.salsa20'
 	echo '5.rc4-md5'
 	while :; do echo
-	read -p "ÊäÈë¼ÓÃÜ·½Ê½£º " um
+	read -p "è¾“å…¥åŠ å¯†æ–¹å¼ï¼š " um
 	if [[ ! $um =~ ^[1-5]$ ]]; then
-		echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+		echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 	else
 		break	
 	fi
@@ -98,7 +98,7 @@ if [[ $ec == 2 ]];then
 	fi
 fi
 if [[ $ec == 3 ]];then
-	echo "Ğ­Òé·½Ê½"
+	echo "åè®®æ–¹å¼"
 	echo '1.origin'
 	echo '2.auth_simple'
 	echo '3.auth_sha1_v2'
@@ -108,9 +108,9 @@ if [[ $ec == 3 ]];then
 	echo '7.verify_sha1'
 	echo '8.verify_deflate'
 	while :; do echo
-	read -p "ÊäÈëĞ­Òé·½Ê½£º " ux
+	read -p "è¾“å…¥åè®®æ–¹å¼ï¼š " ux
 	if [[ ! $ux =~ ^[1-8]$ ]]; then
-		echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+		echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 	else
 		break	
 	fi
@@ -151,15 +151,15 @@ if [[ $ec == 3 ]];then
 	fi
 fi
 if [[ $ec == 4 ]];then
-	echo "»ìÏı·½Ê½"
+	echo "æ··æ·†æ–¹å¼"
 	echo '1.plain'
 	echo '2.http_simple'
 	echo '3.http_post'
 	echo '4.tls1.2_ticket_auth'
 	while :; do echo
-	read -p "ÊäÈë»ìÏı·½Ê½£º " uo
+	read -p "è¾“å…¥æ··æ·†æ–¹å¼ï¼š " uo
 	if [[ ! $uo =~ ^[1-4]$ ]]; then
-		echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+		echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 	else
 		break	
 	fi
@@ -187,7 +187,7 @@ if [[ $ec == 4 ]];then
 	fi
 fi
 if [[ $ec == 5 ]];then
-	read -p "ÊäÈëĞ­Òé²ÎÊı£º " ux2
+	read -p "è¾“å…¥åè®®å‚æ•°ï¼š " ux2
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
@@ -199,7 +199,7 @@ if [[ $ec == 5 ]];then
 	fi
 fi
 if [[ $ec == 6 ]];then
-	read -p "ÊäÈë»ìÏı²ÎÊı£º " uo2
+	read -p "è¾“å…¥æ··æ·†å‚æ•°ï¼š " uo2
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
@@ -211,7 +211,7 @@ if [[ $ec == 6 ]];then
 	fi
 fi
 if [[ $ec == 7 ]];then
-	read -p "ÊäÈëÁ÷Á¿ÏŞÖÆ(G)£º " ut
+	read -p "è¾“å…¥æµé‡é™åˆ¶(G)ï¼š " ut
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
@@ -223,7 +223,7 @@ if [[ $ec == 7 ]];then
 	fi
 fi
 if [[ $ec == 8 ]];then
-	read -p "ÊäÈë¶Ë¿ÚÏŞÖÆ£¨Èç1~80ºÍ90~100ÊäÈë"1-80,90-100"£©£º " ub
+	read -p "è¾“å…¥ç«¯å£é™åˆ¶ï¼ˆå¦‚1~80å’Œ90~100è¾“å…¥"1-80,90-100"ï¼‰ï¼š " ub
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr

@@ -1,21 +1,21 @@
-#!/bin/bash
+apt-get install language-pack-zh-hans -y#!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "»¶Ó­Ê¹ÓÃ SSR-Bash (Python Base) Author:Kirito"
-echo "ÊäÈëÊı×ÖÑ¡Ôñ¹¦ÄÜ£º"
+echo "æ¬¢è¿ä½¿ç”¨ SSR-Bash (Python Base) Author:Kirito"
+echo "è¾“å…¥æ•°å­—é€‰æ‹©åŠŸèƒ½ï¼š"
 echo ""
-echo "1.·şÎñÆ÷¿ØÖÆ"
-echo "2.ÓÃ»§¹ÜÀí"
-echo "3.Á÷Á¿¹ÜÀí"
-echo "4.ÊµÑéĞÔ"
+echo "1.æœåŠ¡å™¨æ§åˆ¶"
+echo "2.ç”¨æˆ·ç®¡ç†"
+echo "3.æµé‡ç®¡ç†"
+echo "4.å®éªŒæ€§"
 
 while :; do echo
-read -p "ÇëÑ¡Ôñ£º " choice
+read -p "è¯·é€‰æ‹©ï¼š " choice
 if [[ ! $choice =~ ^[1-4]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi

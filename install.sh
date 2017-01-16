@@ -1,4 +1,4 @@
-#!/bin/bash
+ï»¿#!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #Check Root
@@ -58,11 +58,12 @@ if [ ${OS}=Debian ];then
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
-	apt-get install build-essential
+	apt-get install build-essential -y
 	wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
 	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
 	./configure && make -j2 && make install
 	ldconfig
+	apt-get install language-pack-zh-hans -y
 fi
 
 #Install SSR and SSR-Bash
@@ -78,5 +79,5 @@ wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubuserconte
 chmod +x /usr/local/bin/ssr
 
 #INstall Success
-echo '°²×°Íê³É£¡ÊäÈë ssr ¼´¿ÉÊ¹ÓÃ±¾³ÌĞò~'
-echo '»¶Ó­¼ÓQQÈº£º277717865 ÌÖÂÛ½»Á÷Å¶~'
+echo 'å®‰è£…å®Œæˆï¼è¾“å…¥ ssr å³å¯ä½¿ç”¨æœ¬ç¨‹åº~'
+echo 'æ¬¢è¿åŠ QQç¾¤ï¼š277717865 è®¨è®ºäº¤æµå“¦~'

@@ -4,29 +4,29 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "ÄãÑ¡ÔñÁËÌí¼ÓÓÃ»§"
+echo "ä½ é€‰æ‹©äº†æ·»åŠ ç”¨æˆ·"
 echo ""
-read -p "ÊäÈëÓÃ»§Ãû£º " uname
-read -p "ÊäÈë¶Ë¿Ú£º " uport
-read -p "ÊäÈëÃÜÂë£º " upass
+read -p "è¾“å…¥ç”¨æˆ·åï¼š " uname
+read -p "è¾“å…¥ç«¯å£ï¼š " uport
+read -p "è¾“å…¥å¯†ç ï¼š " upass
 echo ""
-echo "¼ÓÃÜ·½Ê½"
+echo "åŠ å¯†æ–¹å¼"
 echo '1.chacha20'
 echo '2.aes-128-cfb'
 echo '3.aes-256-cfb'
 echo '4.salsa20'
 echo '5.rc4-md5'
 while :; do echo
-read -p "ÊäÈë¼ÓÃÜ·½Ê½£º " um
+read -p "è¾“å…¥åŠ å¯†æ–¹å¼ï¼š " um
 if [[ ! $um =~ ^[1-5]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi
 done
 
 
-echo "Ğ­Òé·½Ê½"
+echo "åè®®æ–¹å¼"
 echo '1.origin'
 echo '2.auth_simple'
 echo '3.auth_sha1_v2'
@@ -36,23 +36,23 @@ echo '6.auth_aes128_sha1'
 echo '7.verify_sha1'
 echo '8.verify_deflate'
 while :; do echo
-read -p "ÊäÈëĞ­Òé·½Ê½£º " ux
+read -p "è¾“å…¥åè®®æ–¹å¼ï¼š " ux
 if [[ ! $ux =~ ^[1-8]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi
 done
 
-echo "»ìÏı·½Ê½"
+echo "æ··æ·†æ–¹å¼"
 echo '1.plain'
 echo '2.http_simple'
 echo '3.http_post'
 echo '4.tls1.2_ticket_auth'
 while :; do echo
-read -p "ÊäÈë»ìÏı·½Ê½£º " uo
+read -p "è¾“å…¥æ··æ·†æ–¹å¼ï¼š " uo
 if [[ ! $uo =~ ^[1-4]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi
@@ -108,10 +108,10 @@ fi
 if [[ $uo == 4 ]];then
 	uo1="tls1.2_ticket_auth"
 fi
-read -p "ÊäÈëĞ­Òé²ÎÊı£º " ux2
-read -p "ÊäÈë»ìÏı²ÎÊı£º " uo2
-read -p "ÊäÈëÁ÷Á¿ÏŞÖÆ(G)£º " ut
-read -p "ÊäÈë¶Ë¿ÚÏŞÖÆ£¨Èç1~80ºÍ90~100ÊäÈë"1-80,90-100"£©£º " ub
+read -p "è¾“å…¥åè®®å‚æ•°ï¼š " ux2
+read -p "è¾“å…¥æ··æ·†å‚æ•°ï¼š " uo2
+read -p "è¾“å…¥æµé‡é™åˆ¶(G)ï¼š " ut
+read -p "è¾“å…¥ç«¯å£é™åˆ¶ï¼ˆå¦‚1~80å’Œ90~100è¾“å…¥"1-80,90-100"ï¼‰ï¼š " ub
 
 cd /usr/local/shadowsocksr
 python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -G $ux2 -g $uo2 -t $ut -f $ub

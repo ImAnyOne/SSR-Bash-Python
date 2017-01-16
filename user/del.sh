@@ -4,24 +4,24 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "1.Ê¹ÓÃÓÃ»§Ãû"
-echo "2.Ê¹ÓÃ¶Ë¿Ú"
+echo "1.ä½¿ç”¨ç”¨æˆ·å"
+echo "2.ä½¿ç”¨ç«¯å£"
 echo ""
 while :; do echo
-	read -p "ÇëÑ¡Ôñ£º " lsid
+	read -p "è¯·é€‰æ‹©ï¼š " lsid
 	if [[ ! $lsid =~ ^[1-2]$ ]]; then
-		echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+		echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 	else
 		break	
 	fi
 done
 if [[ $lsid == 1 ]];then
-	read -p "ÊäÈëÓÃ»§Ãû£º " uid
+	read -p "è¾“å…¥ç”¨æˆ·åï¼š " uid
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -d -u $uid
 fi
 if [[ $lsid == 1 ]];then
-	read -p "ÊäÈë¶Ë¿ÚºÅ£º " uid
+	read -p "è¾“å…¥ç«¯å£å·ï¼š " uid
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -d -p $uid
 fi
