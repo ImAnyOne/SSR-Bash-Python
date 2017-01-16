@@ -4,18 +4,18 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "ÄãÑ¡ÔñÁË·şÎñÆ÷¹ÜÀí"
-echo "1.²é¿´·şÎñÆ÷ÔËĞĞ×´Ì¬"
-echo "2.Æô¶¯·şÎñ"
-echo "3.Í£Ö¹·şÎñ"
-echo "4.Æô¶¯´øÈÕÖ¾µÄ·şÎñ"
-echo "5.²é¿´ÈÕÖ¾"
-echo "6.ĞŞ¸ÄDNS"
+echo "ä½ é€‰æ‹©äº†æœåŠ¡å™¨ç®¡ç†"
+echo "1.æŸ¥çœ‹æœåŠ¡å™¨è¿è¡ŒçŠ¶æ€"
+echo "2.å¯åŠ¨æœåŠ¡"
+echo "3.åœæ­¢æœåŠ¡"
+echo "4.å¯åŠ¨å¸¦æ—¥å¿—çš„æœåŠ¡"
+echo "5.æŸ¥çœ‹æ—¥å¿—"
+echo "6.ä¿®æ”¹DNS"
 
 while :; do echo
-read -p "ÇëÑ¡Ôñ£º " serverc
+read -p "è¯·é€‰æ‹©ï¼š " serverc
 if [[ ! $serverc =~ ^[1-6]$ ]]; then
-	echo "${CWARNING}ÊäÈë´íÎó! ÇëÊäÈëÕıÈ·µÄÊı×Ö!${CEND}"
+	echo "${CWARNING}è¾“å…¥é”™è¯¯! è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—!${CEND}"
 else
 	break	
 fi
@@ -41,9 +41,9 @@ if [[ $serverc == 5 ]];then
 	bash tail.sh
 fi
 if [[ $serverc == 6 ]];then
-	read -p "ÊäÈëÖ÷Òª DNS ·şÎñÆ÷: " ifdns1
-	read -p "ÊäÈë´ÎÒª DNS ·şÎñÆ÷: " ifdns2
+	read -p "è¾“å…¥ä¸»è¦ DNS æœåŠ¡å™¨: " ifdns1
+	read -p "è¾“å…¥æ¬¡è¦ DNS æœåŠ¡å™¨: " ifdns2
 	echo "nameserver $ifdns1" > /etc/resolv.conf
 	echo "nameserver $ifdns2" >> /etc/resolv.conf
-	echo "DNS ·şÎñÆ÷ÒÑÉèÖÃÎª  $ifdns1 $ifdns2"
+	echo "DNS æœåŠ¡å™¨å·²è®¾ç½®ä¸º  $ifdns1 $ifdns2"
 fi
