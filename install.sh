@@ -34,16 +34,35 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 #Install Basic Tools
 if [ ${OS}=Ubuntu ];then
+	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
+	apt-get install build-essential
+	wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
+	./configure && make -j2 && make install
+	ldconfig
 fi
 if [ ${OS}=CentOS ];then
+	yum install python -y
 	yum install python-setuptools && easy_install pip -y
 	yum install git -y
+	yum -y groupinstall "Development Tools"
+	wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
+	./configure && make -j2 && make install
+	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
+	ldconfig
 fi
-if [ ${OS}=CentOS ];then
+if [ ${OS}=Debian ];then
+	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
+	apt-get install build-essential
+	wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
+	./configure && make -j2 && make install
+	ldconfig
 fi
 
 #Install SSR and SSR-Bash
