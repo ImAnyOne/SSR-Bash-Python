@@ -37,7 +37,7 @@ if [ ${OS}=Ubuntu ];then
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
-	apt-get install build-essential
+	apt-get install build-essential -y
 	wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
 	tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
 	./configure && make -j2 && make install
