@@ -108,10 +108,11 @@ fi
 if [[ $uo == 4 ]];then
 	uo1="tls1.2_ticket_auth"
 fi
-read -p "输入协议参数： " ux2
-read -p "输入混淆参数： " uo2
+#read -p "输入协议参数： " ux2
+#read -p "输入混淆参数： " uo2
 read -p "输入流量限制(G)： " ut
-read -p "输入端口限制（如1~80和90~100输入"1-80,90-100"）： " ub
+#read -p "输入端口限制（如1~80和90~100输入"1-80,90-100"）： " ub
 
 cd /usr/local/shadowsocksr
-python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -G $ux2 -g $uo2 -t $ut -f $ub
+#python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -G $ux2 -g $uo2 -t $ut -f $ub
+python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t $ut

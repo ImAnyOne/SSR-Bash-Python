@@ -20,7 +20,7 @@ if [[ $lsid == 1 ]];then
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -d -u $uid
 fi
-if [[ $lsid == 1 ]];then
+if [[ $lsid == 2 ]];then
 	read -p "输入端口号： " uid
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -d -p $uid
