@@ -10,7 +10,7 @@ read -p "输入用户名： " uname
 
 while :; do echo
 read -p "输入端口： " uport
-if [[ ! $uport =~ ^[1-5]$ ]]; then
+if [[ ! $uport =~ ^[1-65535]$ ]]; then
 	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 else
 	break	
