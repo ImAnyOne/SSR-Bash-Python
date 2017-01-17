@@ -7,7 +7,16 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 echo "你选择了添加用户"
 echo ""
 read -p "输入用户名： " uname
+
+while :; do echo
 read -p "输入端口： " uport
+if [[ ! $uport =~ ^[1-5]$ ]]; then
+	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+else
+	break	
+fi
+done
+
 read -p "输入密码： " upass
 echo ""
 echo "加密方式"
