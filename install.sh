@@ -73,7 +73,8 @@ git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 git clone https://github.com/FunctionClub/SSR-Bash-Python.git
 cd /usr/local/shadowsocksr
 bash initcfg.sh
-sed 's/sspanelv2/mudbjson/g' userapiconfig.py
+cd /usr/local/shadowsocksr
+sed 's/sspanelv2/mudbjson/g' config.py
 
 #Install SSR-Bash Background
 wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/ssr
