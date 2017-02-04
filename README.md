@@ -1,5 +1,6 @@
 # SSR-Bash #
 ShadowsocksR多用户管理脚本（基于官方版本）
+
 ## 介绍 ##
 一个Shell脚本，集成SSR多用户管理，流量限制，加密更改等基本操作。
 如有任何问题和意见，欢迎加QQ群：277717865
@@ -17,9 +18,8 @@ ShadowsocksR多用户管理脚本（基于官方版本）
 - 自动安装Libsodium库以支持Chacha20等加密方式
 
 ## 缺点 ##
-1. 无法删除最后一名用户（官方限制）
-## 系统支持 ##
-- SSR官方支持的操作系统均可
+- 无法删除最后一名用户（官方限制）
+
 ## 安装 ##
     wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/install.sh && bash install.sh
 
