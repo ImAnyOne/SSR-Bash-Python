@@ -140,14 +140,14 @@ if [[ $uo == 4 ]];then
 fi
 
 read -p "输入流量限制(只需输入数字，单位：GB)： " ut
-
+echo "用户添加成功！用户信息如下："
 #Run ShadowsocksR
 cd /usr/local/shadowsocksr
 python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t $ut
 
 #Set Firewalls
 if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
-	iptables-restore < /etc/iptables.up.rules
+	iptables-restore < /etc/iptables.up.rules >> /dev/null 2>&1
 	iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
 	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
 	iptables-save > /etc/iptables.up.rules

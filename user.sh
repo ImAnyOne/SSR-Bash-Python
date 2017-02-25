@@ -10,9 +10,10 @@ echo '2.删除用户'
 echo '3.修改用户'
 echo '4.显示用户流量信息'
 echo '5.显示所有用户端口密码信息'
-echo ""
+echo "直接回车返回上级菜单"
 while :; do echo
 read -p "请选择： " userc
+[ -z "$userc" ] && ssr && break
 if [[ ! $userc =~ ^[1-5]$ ]]; then
 	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 else
