@@ -1,8 +1,39 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
+
+#Check OS
+#Check OS
+if [ -n "$(grep 'Aliyun Linux release' /etc/issue)" -o -e /etc/redhat-release ];then
+OS=CentOS
+[ -n "$(grep ' 7\.' /etc/redhat-release)" ] && CentOS_RHEL_version=7
+[ -n "$(grep ' 6\.' /etc/redhat-release)" -o -n "$(grep 'Aliyun Linux release6 15' /etc/issue)" ] && CentOS_RHEL_version=6
+[ -n "$(grep ' 5\.' /etc/redhat-release)" -o -n "$(grep 'Aliyun Linux release5' /etc/issue)" ] && CentOS_RHEL_version=5
+elif [ -n "$(grep 'Amazon Linux AMI release' /etc/issue)" -o -e /etc/system-release ];then
+OS=CentOS
+CentOS_RHEL_version=6
+elif [ -n "$(grep bian /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Debian' ];then
+OS=Debian
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Debian_version=$(lsb_release -sr | awk -F. '{print $1}')
+elif [ -n "$(grep Deepin /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Deepin' ];then
+OS=Debian
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Debian_version=$(lsb_release -sr | awk -F. '{print $1}')
+elif [ -n "$(grep Ubuntu /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Ubuntu' -o -n "$(grep 'Linux Mint' /etc/issue)" ];then
+OS=Ubuntu
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Ubuntu_version=$(lsb_release -sr | awk -F. '{print $1}')
+[ -n "$(grep 'Linux Mint 18' /etc/issue)" ] && Ubuntu_version=16
+else
+echo "${CFAILURE}Does not support this OS, Please contact the author! ${CEND}"
+kill -9 $$
+fi
+
+
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+
 
 echo "你选择了添加用户"
 echo ""
@@ -108,11 +139,42 @@ fi
 if [[ $uo == 4 ]];then
 	uo1="tls1.2_ticket_auth"
 fi
-#read -p "输入协议参数： " ux2
-#read -p "输入混淆参数： " uo2
-read -p "输入流量限制(G)： " ut
-#read -p "输入端口限制（如1~80和90~100输入"1-80,90-100"）： " ub
 
+read -p "输入流量限制(只需输入数字，单位：GB)： " ut
+
+#Run ShadowsocksR
 cd /usr/local/shadowsocksr
-#python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -G $ux2 -g $uo2 -t $ut -f $ub
 python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t $ut
+
+#Set Firewalls
+if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+fi
+
+if [[ ${OS} == CentOS ]];then
+    if [[ ${CentOS_RHEL_version} == 7 ]];then
+		systemctl status firewalld > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+        	firewall-cmd --permanent --zone=public --add-port=$uport/tcp
+        	firewall-cmd --permanent --zone=public --add-port=$uport/udp
+        	firewall-cmd --reload
+        else
+            systemctl start firewalld
+            if [ $? -eq 0 ]; then
+                firewall-cmd --permanent --zone=public --add-port=$uport/tcp
+                firewall-cmd --permanent --zone=public --add-port=$uport/udp
+                firewall-cmd --reload
+            else
+            	echo "防火墙配置失败，请手动开放 $uport 端口！" 
+            fi
+        fi
+    else
+        iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
+        iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
+		/etc/init.d/iptables save
+		/etc/init.d/iptables restart
+    fi
+
+fi
