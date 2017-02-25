@@ -4,12 +4,12 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "你选择了用户管理"
+echo ""
 echo '1.添加用户'
 echo '2.删除用户'
 echo '3.修改用户'
-echo '4.显示用户完整信息'
-echo '5.显示所有用户信息'
+echo '4.显示用户流量信息'
+echo '5.显示所有用户端口密码信息'
 echo ""
 while :; do echo
 read -p "请选择： " userc

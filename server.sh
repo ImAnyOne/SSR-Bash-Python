@@ -4,12 +4,12 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
-echo "你选择了服务器管理"
-echo "1.查看服务器运行状态"
-echo "2.启动服务"
-echo "3.停止服务"
-echo "4.启动带日志的服务"
-echo "5.查看日志"
+echo ""
+echo "1.启动服务"
+echo "2.停止服务"
+echo "3.重启服务"
+echo "4.查看日志"
+echo "5.运行状态"
 echo "6.修改DNS"
 
 while :; do echo
@@ -22,26 +22,28 @@ fi
 done
 
 if [[ $serverc == 1 ]];then
+	bash /usr/local/shadowsocksr/logrun.sh
+	iptables-restore < /etc/iptables.up.rules
+fi
+
+if [[ $serverc == 2 ]];then
+	bash /usr/local/shadowsocksr/stop.sh
+fi
+
+if [[ $serverc == 3 ]];then
+	bash /usr/local/shadowsocksr/stop.sh
+	bash /usr/local/shadowsocksr/logrun.sh
+	iptables-restore < /etc/iptables.up.rules
+fi
+
+if [[ $serverc == 4 ]];then
+	bash /usr/local/shadowsocksr/tail.sh
+fi
+
+if [[ $serverc == 5 ]];then
 	ps aux|grep server.py
 fi
-if [[ $serverc == 2 ]];then
-	cd /usr/local/shadowsocksr
-	bash run.sh
-	iptables-restore < /etc/iptables.up.rules
-fi
-if [[ $serverc == 3 ]];then
-	cd /usr/local/shadowsocksr
-	bash stop.sh
-fi
-if [[ $serverc == 4 ]];then
-	cd /usr/local/shadowsocksr
-	bash logrun.sh
-	iptables-restore < /etc/iptables.up.rules
-fi
-if [[ $serverc == 5 ]];then
-	cd /usr/local/shadowsocksr
-	bash tail.sh
-fi
+
 if [[ $serverc == 6 ]];then
 	read -p "输入主要 DNS 服务器: " ifdns1
 	read -p "输入次要 DNS 服务器: " ifdns2

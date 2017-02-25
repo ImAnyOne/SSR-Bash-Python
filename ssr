@@ -9,8 +9,8 @@ echo "输入数字选择功能："
 echo ""
 echo "1.服务器控制"
 echo "2.用户管理"
-echo "3.流量管理"
-echo "4.实验性"
+echo "3.全局流量管理"
+echo "4.实验性功能"
 
 while :; do echo
 read -p "请选择： " choice
