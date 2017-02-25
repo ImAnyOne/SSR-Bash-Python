@@ -33,20 +33,20 @@ fi
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 #Install Basic Tools
-if [[ ${OS}=Ubuntu ]];then
+if [[ ${OS} == Ubuntu ]];then
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
 	apt-get install build-essential -y
 	apt-get install language-pack-zh-hans -y
 fi
-if [[ ${OS}=CentOS ]];then
+if [[ ${OS} == CentOS ]];then
 	yum install python -y
 	yum install python-setuptools && easy_install pip -y
 	yum install git -y
 	yum groupinstall "Development Tools" -y
 fi
-if [[ ${OS}=Debian ]];then
+if [[ ${OS} == Debian ]];then
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
