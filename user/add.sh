@@ -147,9 +147,10 @@ python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t
 
 #Set Firewalls
 if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
-iptables-save > /etc/iptables.up.rules
+	iptables-restore < /etc/iptables.up.rules
+	iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
+	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
+	iptables-save > /etc/iptables.up.rules
 fi
 
 if [[ ${OS} == CentOS ]];then
@@ -175,5 +176,4 @@ if [[ ${OS} == CentOS ]];then
 		/etc/init.d/iptables save
 		/etc/init.d/iptables restart
     fi
-
 fi
