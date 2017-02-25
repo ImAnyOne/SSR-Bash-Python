@@ -43,7 +43,7 @@ if [[ ${OS} == Ubuntu ]];then
 fi
 if [[ ${OS} == CentOS ]];then
 	yum install python -y
-	yum install python-setuptools && easy_install pip -y
+	yum install python-setuptools -y && easy_install pip -y
 	yum install git -y
 	yum groupinstall "Development Tools" -y
 fi
