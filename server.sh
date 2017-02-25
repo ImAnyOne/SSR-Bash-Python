@@ -25,7 +25,7 @@ done
 
 if [[ $serverc == 1 ]];then
 	bash /usr/local/shadowsocksr/logrun.sh
-	iptables-restore < /etc/iptables.up.rules >> /dev/null 2>&1
+	iptables-restore < /etc/iptables.up.rules
 	echo "ShadowsocksR服务器已启动"
 fi
 
@@ -37,7 +37,7 @@ fi
 if [[ $serverc == 3 ]];then
 	bash /usr/local/shadowsocksr/stop.sh
 	bash /usr/local/shadowsocksr/logrun.sh
-	iptables-restore < /etc/iptables.up.rules >> /dev/null 2>&1
+	iptables-restore < /etc/iptables.up.rules
 	echo "ShadowsocksR服务器已重启"
 fi
 
