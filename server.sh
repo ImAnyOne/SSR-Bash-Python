@@ -27,6 +27,7 @@ fi
 if [[ $serverc == 2 ]];then
 	cd /usr/local/shadowsocksr
 	bash run.sh
+	iptables-restore < /etc/iptables.up.rules
 fi
 if [[ $serverc == 3 ]];then
 	cd /usr/local/shadowsocksr
@@ -35,6 +36,7 @@ fi
 if [[ $serverc == 4 ]];then
 	cd /usr/local/shadowsocksr
 	bash logrun.sh
+	iptables-restore < /etc/iptables.up.rules
 fi
 if [[ $serverc == 5 ]];then
 	cd /usr/local/shadowsocksr

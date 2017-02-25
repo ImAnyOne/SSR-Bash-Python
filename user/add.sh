@@ -3,7 +3,6 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 
 #Check OS
-#Check OS
 if [ -n "$(grep 'Aliyun Linux release' /etc/issue)" -o -e /etc/redhat-release ];then
 OS=CentOS
 [ -n "$(grep ' 7\.' /etc/redhat-release)" ] && CentOS_RHEL_version=7
