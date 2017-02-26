@@ -243,7 +243,19 @@ if [[ $ec == 6 ]];then
 	fi
 fi
 if [[ $ec == 7 ]];then
-	read -p "输入流量限制(只填写数字，单位为G)： " ut
+	
+while :; do echo
+read -p "输入流量限制(只需输入数字，单位：GB)： " ut
+if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]]
+then
+break
+else
+echo 'Input Error! Please Try Again!'
+fi
+done
+
+
+
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr

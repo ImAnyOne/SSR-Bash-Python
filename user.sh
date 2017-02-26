@@ -9,7 +9,7 @@ echo '1.添加用户'
 echo '2.删除用户'
 echo '3.修改用户'
 echo '4.显示用户流量信息'
-echo '5.显示所有用户端口密码信息'
+echo '5.显示用户名端口信息'
 echo "直接回车返回上级菜单"
 while :; do echo
 read -p "请选择： " userc

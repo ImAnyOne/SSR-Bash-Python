@@ -131,8 +131,15 @@ if [[ $uo == 4 ]];then
 	uo1="tls1.2_ticket_auth"
 fi
 
-read -p "输入流量限制(只需输入数字，单位：GB)： " ut
-
+while :; do echo
+	read -p "输入流量限制(只需输入数字，单位：GB)： " ut
+	if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]]
+	then
+	   break
+	else
+	   echo 'Input Error!'
+	fi
+done
 
 #Set Firewalls
 if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
