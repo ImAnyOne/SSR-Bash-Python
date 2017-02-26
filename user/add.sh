@@ -181,3 +181,9 @@ fi
 echo "用户添加成功！用户信息如下："
 cd /usr/local/shadowsocksr
 python mujson_mgr.py -a -u $uname -p $uport -k $upass -m $um1 -O $ux1 -o $uo1 -t $ut
+SSRPID=$(ps -ef|grep 'python server.py m' |grep -v grep |awk '{print $2}')
+if [[ $SSRPID == "" ]]; then
+    bash /usr/local/shadowsocksr/logrun.sh
+	iptables-restore < /etc/iptables.up.rules
+	echo "ShadowsocksR服务器已启动"
+fi
