@@ -261,11 +261,11 @@ if [[ $ec == 8 ]];then
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
 		#python mujson_mgr.py -e -u $uid -f $ub
-			echo "此功能目前无法使用"
+		echo "此功能目前无法使用"
 	fi
 	if [[ $lsid == 2 ]];then
 		cd /usr/local/shadowsocksr
 		#python mujson_mgr.py -e -p $uid -f $ub
-			echo "此功能目前无法使用"
+		echo "此功能目前无法使用"
 	fi
 fi
