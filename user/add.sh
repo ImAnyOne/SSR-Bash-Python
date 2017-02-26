@@ -154,10 +154,10 @@ fi
 if [[ ${OS} == CentOS ]];then
     if [[ ${CentOS_RHEL_version} == 7 ]];then
     	if [ -f "/usr/sbin/iptables" ]; then
+    		iptables-restore < /etc/iptables.up.rules
         	iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
         	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
-			/etc/init.d/iptables save
-			/etc/init.d/iptables restart
+        	iptables-save > /etc/iptables.up.rules
     	else
 			systemctl status firewalld > /dev/null 2>&1
         	if [ $? -eq 0 ]; then
