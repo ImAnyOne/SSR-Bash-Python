@@ -35,7 +35,7 @@ echo "1.使用用户名"
 echo "2.使用端口"
 echo ""
 while :; do echo
-read -p "请选择： " lsid
+	read -p "请选择： " lsid
 	if [[ ! $lsid =~ ^[1-2]$ ]]; then
 		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 	else
@@ -62,13 +62,13 @@ echo "6.修改混淆参数"
 echo "7.修改流量"
 echo "8.修改端口限制"
 
-
-read -p "请选择： " ec
-if [[ ! $ec =~ ^[1-8]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-else
-	break	
-fi
+while :; do echo
+	read -p "请选择： " ec
+	if [[ ! $ec =~ ^[1-8]$ ]]; then
+		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+	else
+		break	
+	fi
 done
 
 if [[ $ec == 1 ]];then

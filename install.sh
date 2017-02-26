@@ -61,7 +61,7 @@ wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.
 tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
 ./configure && make -j2 && make install
 ldconfig
-
+cd ../ && rm -rf libsodium-1.0.10.tar.gz libsodium-1.0.10
 #Install SSR and SSR-Bash
 cd /usr/local
 git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
