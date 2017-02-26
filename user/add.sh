@@ -41,14 +41,15 @@ read -p "输入端口： " uport
 read -p "输入密码： " upass
 echo ""
 echo "加密方式"
-echo '1.chacha20'
+echo '1.aes-192-cfb'
 echo '2.aes-128-cfb'
 echo '3.aes-256-cfb'
-echo '4.salsa20'
-echo '5.rc4-md5'
+echo '4.aes-128-ctr'
+echo '5.aes-256-ctr'
+echo '6.rc4-md5'
 while :; do echo
 read -p "输入加密方式： " um
-if [[ ! $um =~ ^[1-5]$ ]]; then
+if [[ ! $um =~ ^[1-6]$ ]]; then
 	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 else
 	break	
@@ -58,16 +59,13 @@ done
 
 echo "协议方式"
 echo '1.origin'
-echo '2.auth_simple'
-echo '3.auth_sha1_v2'
-echo '4.auth_sha1_v4'
-echo '5.auth_aes128_md5'
-echo '6.auth_aes128_sha1'
-echo '7.verify_sha1'
-echo '8.verify_deflate'
+echo '2.auth_sha1_v4'
+echo '3.auth_aes128_md5'
+echo '4.auth_aes128_sha1'
+echo '5.verify_deflate'
 while :; do echo
 read -p "输入协议方式： " ux
-if [[ ! $ux =~ ^[1-8]$ ]]; then
+if [[ ! $ux =~ ^[1-5]$ ]]; then
 	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 else
 	break	
@@ -88,7 +86,7 @@ else
 fi
 done
 if [[ $um == 1 ]];then
-	um1="chacha20"
+	um1="aes-192-cfb"
 fi
 if [[ $um == 2 ]];then
 	um1="aes-128-cfb"
@@ -97,33 +95,27 @@ if [[ $um == 3 ]];then
 	um1="aes-256-cfb"
 fi
 if [[ $um == 4 ]];then
-	um1="salsa20"
+	um1="aes-128-ctr"
 fi
 if [[ $um == 5 ]];then
+	um1="aes-256-ctr"
+fi
+if [[ $um == 6 ]];then
 	um1="rc4-md5"
 fi
 if [[ $ux == 1 ]];then
 	ux1="origin"
 fi
 if [[ $ux == 2 ]];then
-	ux1="auth_simple"
-fi
-if [[ $ux == 3 ]];then
-	ux1="auth_sha1_v2"
-fi
-if [[ $ux == 4 ]];then
 	ux1="auth_sha1_v4"
 fi
-if [[ $ux == 5 ]];then
+if [[ $ux == 3 ]];then
 	ux1="auth_aes128_md5"
 fi
-if [[ $ux == 6 ]];then
+if [[ $ux == 4 ]];then
 	ux1="auth_aes128_sha1"
 fi
-if [[ $ux == 7 ]];then
-	ux1="verify_sha1"
-fi
-if [[ $ux == 8 ]];then
+if [[ $ux == 5 ]];then
 	ux1="verify_deflate"
 fi
 if [[ $uo == 1 ]];then

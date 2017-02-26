@@ -38,33 +38,23 @@ if [[ ${OS} == Ubuntu ]];then
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
-	apt-get install build-essential -y
 	apt-get install language-pack-zh-hans -y
 fi
 if [[ ${OS} == CentOS ]];then
 	yum install python -y
 	yum install python-setuptools -y && easy_install pip -y
 	yum install git -y
-	yum groupinstall "Development Tools" -y
 fi
 if [[ ${OS} == Debian ]];then
 	apt-get update
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
-	apt-get install build-essential -y
 fi
 
-#Install Libsodium
-cd /root
-wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
-tar xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
-./configure && make -j2 && make install
-ldconfig
-cd ../ && rm -rf libsodium-1.0.10.tar.gz libsodium-1.0.10
 #Install SSR and SSR-Bash
 cd /usr/local
-git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
+git clone https://github.com/shadowsocksr/shadowsocksr.git
 git clone https://github.com/FunctionClub/SSR-Bash-Python.git
 cd /usr/local/shadowsocksr
 bash initcfg.sh
