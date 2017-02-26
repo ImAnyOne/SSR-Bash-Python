@@ -201,6 +201,7 @@ if [[ $ec == 4 ]];then
 	fi
 	if [[ $uo == 4 ]];then
 		uo1="tls1.2_ticket_auth"
+	fi
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
