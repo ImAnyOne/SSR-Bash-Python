@@ -153,22 +153,29 @@ fi
 
 if [[ ${OS} == CentOS ]];then
     if [[ ${CentOS_RHEL_version} == 7 ]];then
-		systemctl status firewalld > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-        	firewall-cmd --permanent --zone=public --add-port=$uport/tcp
-        	firewall-cmd --permanent --zone=public --add-port=$uport/udp
-        	firewall-cmd --reload
-        else
-            systemctl start firewalld
-            if [ $? -eq 0 ]; then
-                firewall-cmd --permanent --zone=public --add-port=$uport/tcp
-                firewall-cmd --permanent --zone=public --add-port=$uport/udp
-                firewall-cmd --reload
-            else
-            	echo "防火墙配置失败，请手动开放 $uport 端口！" 
-            fi
-        fi
-    else
+    	if [ -f "/usr/sbin/iptables" ]; then
+        	iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
+        	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
+			/etc/init.d/iptables save
+			/etc/init.d/iptables restart
+    	else
+			systemctl status firewalld > /dev/null 2>&1
+        	if [ $? -eq 0 ]; then
+        		firewall-cmd --permanent --zone=public --add-port=$uport/tcp
+        		firewall-cmd --permanent --zone=public --add-port=$uport/udp
+        		firewall-cmd --reload
+        	else
+            	systemctl start firewalld
+            	if [ $? -eq 0 ]; then
+                	firewall-cmd --permanent --zone=public --add-port=$uport/tcp
+                	firewall-cmd --permanent --zone=public --add-port=$uport/udp
+                	firewall-cmd --reload
+            	else
+            		echo "防火墙配置失败，请手动开放 $uport 端口！" 
+            	fi
+        	fi
+		fi
+	else
         iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
         iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
 		/etc/init.d/iptables save
