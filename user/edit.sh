@@ -93,9 +93,12 @@ if [[ $ec == 2 ]];then
 	echo '4.aes-128-ctr'
 	echo '5.aes-256-ctr'
 	echo '6.rc4-md5'
+	echo '7.chacha20'
+	echo '8.chacha20-ietf'
+	echo '9.salsa20'
 	while :; do echo
 	read -p "输入新加密方式： " um
-	if [[ ! $um =~ ^[1-6]$ ]]; then
+	if [[ ! $um =~ ^[1-9]$ ]]; then
 		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
 	else
 		break	
@@ -119,6 +122,15 @@ if [[ $ec == 2 ]];then
 	fi
 	if [[ $um == 6 ]];then
 		um1="rc4-md5"
+	fi
+	if [[ $um == 7 ]];then
+		um1="chacha20"
+	fi
+	if [[ $um == 8 ]];then
+		um1="chacha20-ietf"
+	fi
+	if [[ $um == 9 ]];then
+		um1="salsa20"
 	fi
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
