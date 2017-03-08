@@ -199,10 +199,10 @@ fi
 
 if [[ ${OS} == CentOS ]];then
 	if [[ $CentOS_RHEL_version == 7 ]];then
+		iptables-restore < /etc/iptables.up.rules
 		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
     	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
-		iptables-save
-		systemctl restart iptables.service
+		iptables-save > /etc/iptables.up.rules
 	else
 		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $uport -j ACCEPT
     	iptables -I INPUT -m state --state NEW -m udp -p udp --dport $uport -j ACCEPT
