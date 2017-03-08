@@ -160,6 +160,17 @@ if [[ $ec == 3 ]];then
 	fi
 	done
 	
+	if [[ $ux == 2 ]]
+	while :; do echo
+		read -p "是否兼容原版协议（y/n）： " ifprotocolcompatible
+		if [[ ! $ifprotocolcompatible =~ ^[y,n]$ ]]; then
+			echo "输入错误! 请输入y或者n!"
+		else
+			break
+		fi
+	done
+	fi
+
 	if [[ $ux == 1 ]];then
 	ux1="origin"
 	fi
@@ -175,6 +186,11 @@ if [[ $ec == 3 ]];then
 	if [[ $ux == 5 ]];then
 		ux1="verify_deflate"
 	fi
+
+	if [[ $ifprotocolcompatible == y ]]; then
+		ux1=${ux1}"_compatible"
+	fi
+
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
@@ -202,6 +218,17 @@ if [[ $ec == 4 ]];then
 	fi
 	done
 	
+	if [[ $uo != 1 ]]
+		while :; do echo
+			read -p "是否兼容原版混淆（y/n）： " ifobfscompatible
+			if [[ ! $ifobfscompatible =~ ^[y,n]$ ]]; then
+				echo "输入错误! 请输入y或者n!"
+			else
+				break
+			fi
+		done
+	fi
+
 	if [[ $uo == 1 ]];then
 		uo1="plain"
 	fi
@@ -214,6 +241,11 @@ if [[ $ec == 4 ]];then
 	if [[ $uo == 4 ]];then
 		uo1="tls1.2_ticket_auth"
 	fi
+	
+	if [[ $ifobfscompatible == y ]]; then
+		uo1=${uo1}"_compatible"
+	fi
+	
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr

@@ -75,6 +75,19 @@ else
 fi
 done
 
+if [[ $ux == 2 ]]
+	while :; do echo
+		read -p "是否兼容原版协议（y/n）： " ifprotocolcompatible
+		if [[ ! $ifprotocolcompatible =~ ^[y,n]$ ]]; then
+			echo "输入错误! 请输入y或者n!"
+		else
+			break
+		fi
+	done
+fi
+
+
+
 echo "混淆方式"
 echo '1.plain'
 echo '2.http_simple'
@@ -83,11 +96,24 @@ echo '4.tls1.2_ticket_auth'
 while :; do echo
 read -p "输入混淆方式： " uo
 if [[ ! $uo =~ ^[1-4]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+	echo "输入错误! 请输入正确的数字!"
 else
 	break	
 fi
 done
+
+if [[ $uo != 1 ]]
+	while :; do echo
+		read -p "是否兼容原版混淆（y/n）： " ifobfscompatible
+		if [[ ! $ifobfscompatible =~ ^[y,n]$ ]]; then
+			echo "输入错误! 请输入y或者n!"
+		else
+			break
+		fi
+	done
+fi
+
+
 if [[ $um == 1 ]];then
 	um1="aes-192-cfb"
 fi
@@ -142,6 +168,14 @@ if [[ $uo == 3 ]];then
 fi
 if [[ $uo == 4 ]];then
 	uo1="tls1.2_ticket_auth"
+fi
+
+if [[ $ifobfscompatible == y ]]; then
+	uo1=${uo1}"_compatible"
+fi
+
+if [[ $ifprotocolcompatible == y ]]; then
+	ux1=${ux1}"_compatible"
 fi
 
 while :; do echo
