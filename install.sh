@@ -32,6 +32,10 @@ fi
 #Set DNS
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+
+#Get Current Directory
+workdir=$(pwd)
+
 #Install Basic Tools
 if [[ ${OS} == Ubuntu ]];then
 	apt-get update
@@ -39,17 +43,20 @@ if [[ ${OS} == Ubuntu ]];then
 	apt-get install python-pip -y
 	apt-get install git -y
 	apt-get install language-pack-zh-hans -y
+    apt-get install build-essential -y
 fi
 if [[ ${OS} == CentOS ]];then
 	yum install python -y
 	yum install python-setuptools -y && easy_install pip -y
 	yum install git -y
+    yum groupinstall "Development Tools" -y
 fi
 if [[ ${OS} == Debian ]];then
 	apt-get update
 	apt-get install python -y
 	apt-get install python-pip -y
 	apt-get install git -y
+    apt-get install build-essential -y
 fi
 
 #Install SSR and SSR-Bash
@@ -60,6 +67,7 @@ cd /usr/local/shadowsocksr
 bash initcfg.sh
 
 #Install Libsodium
+cd $workdir
 export LIBSODIUM_VER=1.0.11
 wget https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-$LIBSODIUM_VER.tar.gz
 tar xvf libsodium-$LIBSODIUM_VER.tar.gz
@@ -68,6 +76,8 @@ pushd libsodium-$LIBSODIUM_VER
 make install
 popd
 ldconfig
+cd $workdir && rm -rf libsodium-$LIBSODIUM_VER.tar.gz libsodium-$LIBSODIUM_VER
+
 #Install SSR-Bash Background
 wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/ssr
 chmod +x /usr/local/bin/ssr
