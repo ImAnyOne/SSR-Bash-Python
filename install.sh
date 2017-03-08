@@ -59,6 +59,15 @@ git clone https://github.com/FunctionClub/SSR-Bash-Python.git
 cd /usr/local/shadowsocksr
 bash initcfg.sh
 
+#Install Libsodium
+export LIBSODIUM_VER=1.0.11
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-$LIBSODIUM_VER.tar.gz
+tar xvf libsodium-$LIBSODIUM_VER.tar.gz
+pushd libsodium-$LIBSODIUM_VER
+./configure --prefix=/usr && make
+make install
+popd
+ldconfig
 #Install SSR-Bash Background
 wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/ssr
 chmod +x /usr/local/bin/ssr
