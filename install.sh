@@ -78,6 +78,33 @@ popd
 ldconfig
 cd $workdir && rm -rf libsodium-$LIBSODIUM_VER.tar.gz libsodium-$LIBSODIUM_VER
 
+#Change CentOS7 Firewall
+if [[ ${OS} == CentOS && $CentOS_RHEL_version == 7 ]];then
+    systemctl stop firewalld.service
+    systemctl disable firewalld.service
+    yum install iptables-services -y
+    cat << EOF > /etc/sysconfig/iptables
+# sample configuration for iptables service
+# you can edit this manually or use system-config-firewall
+# please do not ask us to add additional ports/services to this default configuration
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+EOF
+systemctl restart iptables.service
+systemctl enable iptables.service
+fi
+
 #Install SSR-Bash Background
 wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/ssr
 chmod +x /usr/local/bin/ssr
