@@ -2,7 +2,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #Check Root
-[ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
 echo "1.使用用户名"
 echo "2.使用端口"
@@ -10,7 +10,7 @@ echo ""
 while :; do echo
 	read -p "请选择： " lsid
 	if [[ ! $lsid =~ ^[1-2]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
 	fi

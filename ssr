@@ -2,9 +2,9 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #Check Root
-[ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
-echo "欢迎使用 SSR-Bash (Python Base) Author:Kirito"
+echo "欢迎使用 SSR-Bash (Python Base) Author:Kirito 雨落无声"
 echo "输入数字选择功能："
 echo ""
 echo "1.服务器控制"
@@ -13,23 +13,26 @@ echo "3.全局流量管理"
 echo "4.实验性功能"
 
 while :; do echo
-read -p "请选择： " choice
-if [[ ! $choice =~ ^[1-4]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-else
-	break	
-fi
+	read -p "请选择： " choice
+	if [[ ! $choice =~ ^[1-4]$ ]]; then
+		echo "输入错误! 请输入正确的数字!"
+	else
+		break	
+	fi
 done
 
 if [[ $choice == 1 ]];then
 	bash /usr/local/SSR-Bash-Python/server.sh
 fi
+
 if [[ $choice == 2 ]];then
 	bash /usr/local/SSR-Bash-Python/user.sh
 fi
+
 if [[ $choice == 3 ]];then
 	bash /usr/local/SSR-Bash-Python/traffic.sh
 fi
+
 if [[ $choice == 4 ]];then
 	bash /usr/local/SSR-Bash-Python/dev.sh
 fi

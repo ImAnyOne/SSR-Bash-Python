@@ -2,7 +2,7 @@
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 #Check Root
-[ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
 echo ""
 echo "1.启动服务"
@@ -14,13 +14,13 @@ echo "6.修改DNS"
 echo "直接回车返回上级菜单"
 
 while :; do echo
-read -p "请选择： " serverc
-[ -z "$serverc" ] && ssr && break
-if [[ ! $serverc =~ ^[1-6]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-else
-	break	
-fi
+	read -p "请选择： " serverc
+	[ -z "$serverc" ] && ssr && break
+	if [[ ! $serverc =~ ^[1-6]$ ]]; then
+		echo "输入错误! 请输入正确的数字!"
+	else
+		break	
+	fi
 done
 
 if [[ $serverc == 1 ]];then

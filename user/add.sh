@@ -25,13 +25,13 @@ OS=Ubuntu
 Ubuntu_version=$(lsb_release -sr | awk -F. '{print $1}')
 [ -n "$(grep 'Linux Mint 18' /etc/issue)" ] && Ubuntu_version=16
 else
-echo "${CFAILURE}Does not support this OS, Please contact the author! ${CEND}"
+echo "Does not support this OS, Please contact the author! "
 kill -9 $$
 fi
 
 
 #Check Root
-[ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
 
 echo "你选择了添加用户"
@@ -51,12 +51,12 @@ echo '7.chacha20'
 echo '8.chacha20-ietf'
 echo '9.salsa20'
 while :; do echo
-read -p "输入加密方式： " um
-if [[ ! $um =~ ^[1-9]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-else
-	break	
-fi
+	read -p "输入加密方式： " um
+	if [[ ! $um =~ ^[1-9]$ ]]; then
+		echo "输入错误! 请输入正确的数字!"
+	else
+		break	
+	fi
 done
 
 
@@ -67,12 +67,12 @@ echo '3.auth_aes128_md5'
 echo '4.auth_aes128_sha1'
 echo '5.verify_deflate'
 while :; do echo
-read -p "输入协议方式： " ux
-if [[ ! $ux =~ ^[1-5]$ ]]; then
-	echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-else
-	break	
-fi
+	read -p "输入协议方式： " ux
+	if [[ ! $ux =~ ^[1-5]$ ]]; then
+		echo "输入错误! 请输入正确的数字!"
+	else
+		break	
+	fi
 done
 
 if [[ $ux == 2 ]];then
@@ -94,12 +94,12 @@ echo '2.http_simple'
 echo '3.http_post'
 echo '4.tls1.2_ticket_auth'
 while :; do echo
-read -p "输入混淆方式： " uo
-if [[ ! $uo =~ ^[1-4]$ ]]; then
-	echo "输入错误! 请输入正确的数字!"
-else
-	break	
-fi
+	read -p "输入混淆方式： " uo
+	if [[ ! $uo =~ ^[1-4]$ ]]; then
+		echo "输入错误! 请输入正确的数字!"
+	else
+		break	
+	fi
 done
 
 if [[ $uo != 1 ]];then
@@ -180,8 +180,7 @@ fi
 
 while :; do echo
 	read -p "输入流量限制(只需输入数字，单位：GB)： " ut
-	if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]]
-	then
+	if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]];then
 	   break
 	else
 	   echo 'Input Error!'

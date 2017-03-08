@@ -37,7 +37,7 @@ echo ""
 while :; do echo
 	read -p "请选择： " lsid
 	if [[ ! $lsid =~ ^[1-2]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
 	fi
@@ -65,7 +65,7 @@ echo "8.修改端口限制"
 while :; do echo
 	read -p "请选择： " ec
 	if [[ ! $ec =~ ^[1-8]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
 	fi
@@ -97,12 +97,12 @@ if [[ $ec == 2 ]];then
 	echo '8.chacha20-ietf'
 	echo '9.salsa20'
 	while :; do echo
-	read -p "输入新加密方式： " um
-	if [[ ! $um =~ ^[1-9]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
-	else
-		break	
-	fi
+		read -p "输入新加密方式： " um
+		if [[ ! $um =~ ^[1-9]$ ]]; then
+			echo "输入错误! 请输入正确的数字!"
+		else
+			break	
+		fi
 	done
 	
 	if [[ $um == 1 ]];then
@@ -154,7 +154,7 @@ if [[ $ec == 3 ]];then
 	while :; do echo
 	read -p "输入协议方式： " ux
 	if [[ ! $ux =~ ^[1-5]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
 	fi
@@ -212,7 +212,7 @@ if [[ $ec == 4 ]];then
 	while :; do echo
 	read -p "输入混淆方式： " uo
 	if [[ ! $uo =~ ^[1-4]$ ]]; then
-		echo "${CWARNING}输入错误! 请输入正确的数字!${CEND}"
+		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
 	fi
@@ -286,20 +286,15 @@ if [[ $ec == 6 ]];then
 		echo "端口号为 $uid 的混淆参数已更改为 $uo2"
 	fi
 fi
-if [[ $ec == 7 ]];then
-	
-while :; do echo
-read -p "输入流量限制(只需输入数字，单位：GB)： " ut
-if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]]
-then
-break
-else
-echo 'Input Error! Please Try Again!'
-fi
-done
-
-
-
+if [[ $ec == 7 ]];then	
+	while :; do echo
+		read -p "输入流量限制(只需输入数字，单位：GB)： " ut
+		if [[ "$ut" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]];then
+			break
+		else
+			echo 'Input Error! Please Try Again!'
+		fi
+	done
 	cd /usr/local/shadowsocksr
 	if [[ $lsid == 1 ]];then
 		cd /usr/local/shadowsocksr
