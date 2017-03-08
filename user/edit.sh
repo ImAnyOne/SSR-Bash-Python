@@ -160,7 +160,7 @@ if [[ $ec == 3 ]];then
 	fi
 	done
 	
-	if [[ $ux == 2 ]]
+	if [[ $ux == 2 ]];then
 	while :; do echo
 		read -p "是否兼容原版协议（y/n）： " ifprotocolcompatible
 		if [[ ! $ifprotocolcompatible =~ ^[y,n]$ ]]; then
@@ -218,7 +218,7 @@ if [[ $ec == 4 ]];then
 	fi
 	done
 	
-	if [[ $uo != 1 ]]
+	if [[ $uo != 1 ]];then
 		while :; do echo
 			read -p "是否兼容原版混淆（y/n）： " ifobfscompatible
 			if [[ ! $ifobfscompatible =~ ^[y,n]$ ]]; then
