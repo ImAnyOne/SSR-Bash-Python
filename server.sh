@@ -28,11 +28,15 @@ if [[ $serverc == 1 ]];then
 	iptables-restore < /etc/iptables.up.rules
 	clear
 	echo "ShadowsocksR服务器已启动"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 2 ]];then
 	bash /usr/local/shadowsocksr/stop.sh
 	echo "ShadowsocksR服务器已停止"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 3 ]];then
@@ -41,6 +45,8 @@ if [[ $serverc == 3 ]];then
 	iptables-restore < /etc/iptables.up.rules
 	clear
 	echo "ShadowsocksR服务器已重启"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 4 ]];then
@@ -49,6 +55,7 @@ fi
 
 if [[ $serverc == 5 ]];then
 	ps aux|grep server.py
+	bash /usr/local/SSR-Bash-Python/server.sh
 fi
 
 if [[ $serverc == 6 ]];then
@@ -57,4 +64,6 @@ if [[ $serverc == 6 ]];then
 	echo "nameserver $ifdns1" > /etc/resolv.conf
 	echo "nameserver $ifdns2" >> /etc/resolv.conf
 	echo "DNS 服务器已设置为  $ifdns1 $ifdns2"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
 fi

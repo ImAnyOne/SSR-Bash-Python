@@ -10,6 +10,7 @@ echo "2.一键封禁BT下载，SPAM邮件流量（无法撤销）"
 
 while :; do echo
 	read -p "请选择： " devc
+	[ -z "$devc" ] && ssr && break
 	if [[ ! $devc =~ ^[1-2]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
@@ -24,6 +25,7 @@ if [[ $devc == 1 ]];then
 	mv /usr/local/SSR-Bash-Python/ssr /usr/local/bin/
 	chmod +x /usr/local/bin/ssr
 	echo 'SSR-Bash升级成功！'
+	ssr
 fi
 
 if [[ $devc == 2 ]];then

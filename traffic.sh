@@ -21,6 +21,8 @@ done
 
 if [[ $tc == 1 ]];then
 	python /usr/local/SSR-Bash-Python/show_flow.py
+	echo ""
+	bash /usr/local/SSR-Bash-Python/traffic.sh
 fi
 
 if [[ $tc == 2 ]];then
@@ -49,11 +51,16 @@ if [[ $tc == 2 ]];then
 		python mujson_mgr.py -c -p $uid
 		echo "已清空端口号为${uid} 的用户流量"
 	fi
+	echo ""
+	bash /usr/local/SSR-Bash-Python/traffic.sh
 fi
 
 if [[ $tc == 3 ]];then
 	cd /usr/local/shadowsocksr
 	python mujson_mgr.py -c
 	echo "已清空全部用户的流量使用记录"
+
+	echo ""
+	bash /usr/local/SSR-Bash-Python/traffic.sh
 fi
 
