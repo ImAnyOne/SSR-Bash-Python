@@ -58,5 +58,5 @@ if [[ $userc == 4 ]];then
 	fi
 fi
 if [[ $userc == 5 ]];then
-	bash /usr/local/SSR-Bash-Python/user/show_all_user_info.py
+	python /usr/local/SSR-Bash-Python/user/show_all_user_info.py
 fi
