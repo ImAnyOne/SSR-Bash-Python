@@ -4,6 +4,33 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #Check Root
 [ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
+#CheckOS
+if [ -n "$(grep 'Aliyun Linux release' /etc/issue)" -o -e /etc/redhat-release ];then
+OS=CentOS
+[ -n "$(grep ' 7\.' /etc/redhat-release)" ] && CentOS_RHEL_version=7
+[ -n "$(grep ' 6\.' /etc/redhat-release)" -o -n "$(grep 'Aliyun Linux release6 15' /etc/issue)" ] && CentOS_RHEL_version=6
+[ -n "$(grep ' 5\.' /etc/redhat-release)" -o -n "$(grep 'Aliyun Linux release5' /etc/issue)" ] && CentOS_RHEL_version=5
+elif [ -n "$(grep 'Amazon Linux AMI release' /etc/issue)" -o -e /etc/system-release ];then
+OS=CentOS
+CentOS_RHEL_version=6
+elif [ -n "$(grep bian /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Debian' ];then
+OS=Debian
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Debian_version=$(lsb_release -sr | awk -F. '{print $1}')
+elif [ -n "$(grep Deepin /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Deepin' ];then
+OS=Debian
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Debian_version=$(lsb_release -sr | awk -F. '{print $1}')
+elif [ -n "$(grep Ubuntu /etc/issue)" -o "$(lsb_release -is 2>/dev/null)" == 'Ubuntu' -o -n "$(grep 'Linux Mint' /etc/issue)" ];then
+OS=Ubuntu
+[ ! -e "$(which lsb_release)" ] && { apt-get -y update; apt-get -y install lsb-release; clear; }
+Ubuntu_version=$(lsb_release -sr | awk -F. '{print $1}')
+[ -n "$(grep 'Linux Mint 18' /etc/issue)" ] && Ubuntu_version=16
+else
+echo "Does not support this OS, Please contact the author! "
+kill -9 $$
+fi
+
 echo ""
 echo "1.启动服务"
 echo "2.停止服务"
@@ -11,12 +38,13 @@ echo "3.重启服务"
 echo "4.查看日志"
 echo "5.运行状态"
 echo "6.修改DNS"
+echo "7.开启简易WEB面板"
 echo "直接回车返回上级菜单"
 
 while :; do echo
 	read -p "请选择： " serverc
 	[ -z "$serverc" ] && ssr && break
-	if [[ ! $serverc =~ ^[1-6]$ ]]; then
+	if [[ ! $serverc =~ ^[1-7]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
@@ -65,5 +93,37 @@ if [[ $serverc == 6 ]];then
 	echo "nameserver $ifdns2" >> /etc/resolv.conf
 	echo "DNS 服务器已设置为  $ifdns1 $ifdns2"
 	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
+fi
+
+if [[ $serverc == 7 ]];then
+	#Set Firewalls
+	if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
+		iptables-restore < /etc/iptables.up.rules
+		clear
+		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+		iptables-save > /etc/iptables.up.rules
+	fi
+
+	if [[ ${OS} == CentOS ]];then
+		if [[ $CentOS_RHEL_version == 7 ]];then
+			iptables-restore < /etc/iptables.up.rules
+			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+			iptables-save > /etc/iptables.up.rules
+		else
+			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+			/etc/init.d/iptables save
+			/etc/init.d/iptables restart
+		fi
+	fi
+	#Get IP
+	ip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
+	clear
+	cd /usr/local/SSR-Bash-Python/www
+	screen -dmS webcgi python -m CGIHTTPServer 8080
+	echo "WEB服务启动成功，请访问 http://${ip}:8080"
 	bash /usr/local/SSR-Bash-Python/server.sh
 fi
