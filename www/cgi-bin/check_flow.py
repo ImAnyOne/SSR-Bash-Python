@@ -41,7 +41,10 @@ if(portexist==0):
 	transfer_enable_int = ""
 	transfer_unit = ""
 
-header = 'Content-Type: text/html\n\n'
+header = '''
+<!DOCTYPE HTML>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+'''
 html = '<h3>您的流量信息\n</h3>'
 #打印返回的内容
 print header
