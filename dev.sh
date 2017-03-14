@@ -22,7 +22,7 @@ if [[ $devc == 1 ]];then
 	rm -rf /usr/local/bin/ssr
 	cd /usr/local/SSR-Bash-Python/
 	git pull
-	mv /usr/local/SSR-Bash-Python/ssr /usr/local/bin/
+	wget -N --no-check-certificate -O /usr/local/bin/ssr https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/ssr
 	chmod +x /usr/local/bin/ssr
 	echo 'SSR-Bash升级成功！'
 	ssr
