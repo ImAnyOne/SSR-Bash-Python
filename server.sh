@@ -139,6 +139,8 @@ fi
 if [[ $serverc == 8 ]];then
 	cgipid=$(ps -ef|grep 'webcgi' |grep -v grep |awk '{print $2}')
 	kill -9 $cgipid
+	screen -wipe
+	clear
 	echo "WEB服务已关闭！"
 	echo ""
 	bash /usr/local/SSR-Bash-Python/server.sh
