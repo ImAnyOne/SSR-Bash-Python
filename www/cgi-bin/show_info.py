@@ -50,27 +50,99 @@ if(portexist!=0 and passwdcorrect==0):
 
 
 header = '''
-<!DOCTYPE HTML>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="initial-scale=1.0, width=device-width" name="viewport">
+	<title>连接信息</title>
+	<!-- css -->
+	<link href="../css/base.min.css" rel="stylesheet">
+
+	<!-- favicon -->
+	<!-- ... -->
+
+	<!-- ie -->
+    <!--[if lt IE 9]>
+        <script src="../js/html5shiv.js" type="text/javascript"></script>
+        <script src="../js/respond.js" type="text/javascript"></script>
+    <![endif]-->
+    
+</head>
+<body>
+    <div class="content">
+        <div class="content-heading">
+            <div class="container">
+                <h1 class="heading">&nbsp;&nbsp;连接信息</h1>
+            </div>
+        </div>
+        <div class="content-inner">
+            <div class="container">
 '''
-html = '<h3>您的连接信息\n</h3>'
+
+
+footer = '''
+</div>
+        </div>
+    </div>
+	<footer class="footer">
+		<div class="container">
+			<p>Function Club</p>
+		</div>
+	</footer>
+
+	<script src="../js/base.min.js" type="text/javascript"></script>
+</body>
+</html>
+'''
+
+
 #打印返回的内容
 print header
-print html
-print '<p />'
 
 formhtml = '''
-服务器地址: %s </br>
-连接端口: %s </br>
-连接密码: %s </br>
-加密方式: %s </br>
-协议方式: %s </br>
-混淆方式: %s </br></br>
+
+<div class="card-wrap">
+					<div class="row">
+						
+						
+						<div class="col-lg-4 col-sm-6">
+							<div class="card card-green">
+								<a class="card-side" href="/"><span class="card-heading">连接信息</span></a>
+								<div class="card-main">
+									<div class="card-inner">
+									<p>
+										<strong>服务器地址：</strong> %s </br></br>
+										<strong>连接端口：</strong> %s </br></br>
+										<strong>连接密码：</strong> %s </br></br>
+										<strong>加密方式： </strong> %s </br></br>
+										<strong>协议方式： </strong> </br>%s </br></br>
+										<strong>混淆方式：</strong> </br>%s 
+										</p>
+									</div>
+									<div class="card-action">
+										<ul class="nav nav-list pull-left">
+											<li>
+												<a href="../index.html"><span class="icon icon-check"></span>&nbsp;返回</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+
+
+
+
 '''
-gobackhtml = '''
-<input type="button" name="Submit" value="返回" onclick ="location.href='../show_info.html'"/>
-'''
+
 print formhtml % (myip,getport,getpasswd,jsonmethod,jsonprotocol,jsonobfs)
-print gobackhtml
+print footer
 f.close();
 

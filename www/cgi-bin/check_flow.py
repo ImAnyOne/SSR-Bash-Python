@@ -41,24 +41,90 @@ if(portexist==0):
 	transfer_enable_int = ""
 	transfer_unit = ""
 
+
+
+
+
+
+
 header = '''
-<!DOCTYPE HTML>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="initial-scale=1.0, width=device-width" name="viewport">
+	<title>流量查询</title>
+	<!-- css -->
+	<link href="../css/base.min.css" rel="stylesheet">
+
+	<!-- favicon -->
+	<!-- ... -->
+
+	<!-- ie -->
+    <!--[if lt IE 9]>
+        <script src="../js/html5shiv.js" type="text/javascript"></script>
+        <script src="../js/respond.js" type="text/javascript"></script>
+    <![endif]-->
+    
+</head>
+<body>
+    <div class="content">
+        <div class="content-heading">
+            <div class="container">
+                <h1 class="heading">&nbsp;&nbsp;流量查询</h1>
+            </div>
+        </div>
+        <div class="content-inner">
+            <div class="container">
 '''
-html = '<h3>您的流量信息\n</h3>'
+
+
+footer = '''
+</div>
+        </div>
+    </div>
+	<footer class="footer">
+		<div class="container">
+			<p>Function Club</p>
+		</div>
+	</footer>
+
+	<script src="../js/base.min.js" type="text/javascript"></script>
+</body>
+</html>
+'''
+
+
 #打印返回的内容
 print header
-print html
-print '<p />'
 formhtml = '''
-您的端口: %s </br>
-已使用流量：%s %s </br>
-总流量限制：%s %s </br> </br>
-'''
-gobackhtml = '''
-<input type="button" name="Submit" value="返回" onclick ="location.href='../check_flow.html'"/>
+
+<div class="card-wrap">
+					<div class="row">
+						<div class="col-lg-3 col-md-4 col-sm-6">
+							<div class="card card-alt card-alt-bg">
+								<div class="card-main">
+									<div class="card-inner">
+										<p class="card-heading">端口：%s</p>
+										<p>
+											已使用流量：%s %s <br>
+											总流量限制：%s %s </br></br>
+											<a href="../index.html"><button class="btn" type="button">返回</button></a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+
+
 '''
 print formhtml % (getport,d_int,d_unit,transfer_enable_int,transfer_unit)
-print gobackhtml
+
+print footer
 f.close();
 
