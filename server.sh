@@ -38,13 +38,14 @@ echo "3.重启服务"
 echo "4.查看日志"
 echo "5.运行状态"
 echo "6.修改DNS"
-echo "7.开启简易WEB面板"
+echo "7.开启用户WEB面板"
+echo "8.关闭用户WEB面板"
 echo "直接回车返回上级菜单"
 
 while :; do echo
 	read -p "请选择： " serverc
 	[ -z "$serverc" ] && ssr && break
-	if [[ ! $serverc =~ ^[1-7]$ ]]; then
+	if [[ ! $serverc =~ ^[1-8]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
@@ -97,24 +98,30 @@ if [[ $serverc == 6 ]];then
 fi
 
 if [[ $serverc == 7 ]];then
+	read -p "请输入自定义的WEB端口：" cgiport
+	if [[ "$cgiport" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]];then
+	   break
+	else
+	   echo 'Input Error!'
+	fi
 	#Set Firewalls
 	if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
 		iptables-restore < /etc/iptables.up.rules
 		clear
-		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+		iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $cgiport -j ACCEPT
+		iptables -I INPUT -m state --state NEW -m udp -p udp --dport $cgiport -j ACCEPT
 		iptables-save > /etc/iptables.up.rules
 	fi
 
 	if [[ ${OS} == CentOS ]];then
 		if [[ $CentOS_RHEL_version == 7 ]];then
 			iptables-restore < /etc/iptables.up.rules
-			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $cgiport -j ACCEPT
+    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport $cgiport -j ACCEPT
 			iptables-save > /etc/iptables.up.rules
 		else
-			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8080 -j ACCEPT
+			iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $cgiport -j ACCEPT
+    		iptables -I INPUT -m state --state NEW -m udp -p udp --dport $cgiport -j ACCEPT
 			/etc/init.d/iptables save
 			/etc/init.d/iptables restart
 		fi
@@ -123,7 +130,16 @@ if [[ $serverc == 7 ]];then
 	ip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
 	clear
 	cd /usr/local/SSR-Bash-Python/www
-	screen -dmS webcgi python -m CGIHTTPServer 8080
-	echo "WEB服务启动成功，请访问 http://${ip}:8080"
+	screen -dmS webcgi python -m CGIHTTPServer $cgiport
+	echo "WEB服务启动成功，请访问 http://${ip}:$cgiport"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
+fi
+
+if [[ $serverc == 8 ]];then
+	cgipid=$(ps -ef|grep 'webcgi' |grep -v grep |awk '{print $2}')
+	kill -9 $cgipid
+	echo "WEB服务已关闭！"
+	echo ""
 	bash /usr/local/SSR-Bash-Python/server.sh
 fi
