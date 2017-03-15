@@ -98,12 +98,14 @@ if [[ $serverc == 6 ]];then
 fi
 
 if [[ $serverc == 7 ]];then
-	read -p "请输入自定义的WEB端口：" cgiport
-	if [[ "$cgiport" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]];then
-	   break
-	else
-	   echo 'Input Error!'
-	fi
+	while :; do echo
+		read -p "请输入自定义的WEB端口：" cgiport
+		if [[ "$cgiport" =~ ^(-?|\+?)[0-9]+(\.?[0-9]+)?$ ]];then
+			break
+		else
+			echo 'Input Error!'
+		fi
+	done
 	#Set Firewalls
 	if [[ ${OS} =~ ^Ubuntu$|^Debian$ ]];then
 		iptables-restore < /etc/iptables.up.rules
