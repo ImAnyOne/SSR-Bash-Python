@@ -3,9 +3,10 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 wget http://iscn.kirito.moe/run.sh
 
-bash run.sh
+. ./run.sh
 if [[ $area == cn ]];then
- exit
+echo "Unable to install in china"
+exit
 fi
 
 #Check Root
