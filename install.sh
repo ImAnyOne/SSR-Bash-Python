@@ -118,5 +118,7 @@ sed -i "s/sspanelv2/mudbjson/g" /usr/local/shadowsocksr/userapiconfig.py
 sed -i "s/UPDATE_TIME = 60/UPDATE_TIME = 10/g" /usr/local/shadowsocksr/userapiconfig.py
 #INstall Success
 echo '安装完成！输入 ssr 即可使用本程序~'
-echo '欢迎加QQ群：277717865 讨论交流哦~'
-echo 'Group Password=FunctionClub@Github'
+echo 'Telegram Group: https://t.me/functionclub'
+echo 'Google Puls: https://plus.google.com/communities/113154644036958487268'
+echo 'Github: https://github.com/FunctionClub'
+echo 'QQ Group: 277717865(废弃)'
