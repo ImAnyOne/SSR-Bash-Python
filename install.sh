@@ -117,7 +117,7 @@ chmod +x /usr/local/bin/ssr
 sed -i "s/sspanelv2/mudbjson/g" /usr/local/shadowsocksr/userapiconfig.py
 sed -i "s/UPDATE_TIME = 60/UPDATE_TIME = 10/g" /usr/local/shadowsocksr/userapiconfig.py
 #INstall Success
-bash self-check.sh
+bash /usr/local/SSR-Bash-Python/self-check.sh
 echo '安装完成！输入 ssr 即可使用本程序~'
 echo 'Telegram Group: https://t.me/functionclub'
 echo 'Google Puls: https://plus.google.com/communities/113154644036958487268'
