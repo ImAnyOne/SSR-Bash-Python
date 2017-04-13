@@ -36,7 +36,7 @@ ShadowsocksR多用户管理脚本（基于官方mujson版本）
     wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/uninstall.sh && bash uninstall.sh
     
 ## 自检 ##
-    wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/self-check.sh && bash install.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/self-check.sh && bash self-check.sh
 
 ## 截图 ##
 ![https://raw.githubusercontent.com/FunctionClub/SSR-Bash-Python/master/1.png](1.png)
