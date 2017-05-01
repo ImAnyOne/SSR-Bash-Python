@@ -46,7 +46,7 @@ echo "直接回车返回上级菜单"
 while :; do echo
 	read -p "请选择： " serverc
 	[ -z "$serverc" ] && ssr && break
-	if [[ ! $serverc =~ ^[1-8]$ ]]; then
+	if [[ ! $serverc =~ ^[1-9]$ ]]; then
 		echo "输入错误! 请输入正确的数字!"
 	else
 		break	
