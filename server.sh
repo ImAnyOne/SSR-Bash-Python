@@ -40,6 +40,7 @@ echo "5.运行状态"
 echo "6.修改DNS"
 echo "7.开启用户WEB面板"
 echo "8.关闭用户WEB面板"
+echo "9.开/关服务端开机启动"
 echo "直接回车返回上级菜单"
 
 while :; do echo
@@ -144,6 +145,19 @@ if [[ $serverc == 8 ]];then
 	screen -wipe
 	clear
 	echo "WEB服务已关闭！"
+	echo ""
+	bash /usr/local/SSR-Bash-Python/server.sh
+fi
+
+if [[ $serverc == 9 ]];then
+	if [[ $(sed -n '/#ssr/p' /etc/rc.local | wc -l) == 0 ]];then
+		chmod +x /etc/rc.local
+		sed -i '2i #ssr\nbash /usr/local/shadowsocksr/logrun.sh\niptables-restore < /etc/iptables.up.rules' /etc/rc.local
+		echo "开机启动服务端设置完成"
+	else 
+		sed -i '/#ssr/,+2d' /etc/rc.local
+		echo "开机启动服务端关闭完成"
+	fi
 	echo ""
 	bash /usr/local/SSR-Bash-Python/server.sh
 fi
