@@ -150,14 +150,40 @@ if [[ $serverc == 8 ]];then
 fi
 
 if [[ $serverc == 9 ]];then
-	if [[ $(sed -n '/#ssr/p' /etc/rc.local | wc -l) == 0 ]];then
-		chmod +x /etc/rc.local
-		sed -i '2i #ssr\nbash /usr/local/shadowsocksr/logrun.sh\niptables-restore < /etc/iptables.up.rules' /etc/rc.local
-		echo "开机启动服务端设置完成"
-	else 
-		sed -i '/#ssr/,+2d' /etc/rc.local
-		echo "开机启动服务端关闭完成"
+	if [[ ${OS} == Ubuntu || ${OS} == Debian ]];then
+    	cat >/etc/init.d/ssr-bash-python <<EOF
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          SSR-Bash_python
+# Required-Start: $local_fs $remote_fs
+# Required-Stop: $local_fs $remote_fs
+# Should-Start: $network
+# Should-Stop: $network
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description: SSR-Bash-Python
+# Description: SSR-Bash-Python
+### END INIT INFO
+iptables-restore < /etc/iptables.up.rules
+bash /usr/local/shadowsocksr/logrun.sh
+EOF
+    	chmod 755 /etc/init.d/ssr-bash-python
+    	chmod +x /etc/init.d/ssr-bash-python
+    	cd /etc/init.d
+    	update-rc.d ssr-bash-python defaults 95
 	fi
-	echo ""
+
+	if [[ ${OS} == CentOS ]];then
+    	echo "
+iptables-restore < /etc/iptables.up.rules
+bash /usr/local/shadowsocksr/logrun.sh
+" > /etc/rc.d/init.d/ssr-bash-python
+    	chmod +x  /etc/rc.d/init.d/ssr-bash-python
+    	echo "/etc/rc.d/init.d/ssr-bash-python" >> /etc/rc.d/rc.local
+    	chmod +x /etc/rc.d/rc.local
+	fi
+	echo "开机启动设置完成！"
+        echo ""
 	bash /usr/local/SSR-Bash-Python/server.sh
 fi
+

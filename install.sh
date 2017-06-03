@@ -82,6 +82,41 @@ popd
 ldconfig
 cd $workdir && rm -rf libsodium-$LIBSODIUM_VER.tar.gz libsodium-$LIBSODIUM_VER
 
+#Start when boot
+if [[ ${OS} == Ubuntu || ${OS} == Debian ]];then
+    cat >/etc/init.d/ssr-bash-python <<EOF
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          SSR-Bash_python
+# Required-Start: $local_fs $remote_fs
+# Required-Stop: $local_fs $remote_fs
+# Should-Start: $network
+# Should-Stop: $network
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description: SSR-Bash-Python
+# Description: SSR-Bash-Python
+### END INIT INFO
+iptables-restore < /etc/iptables.up.rules
+bash /usr/local/shadowsocksr/logrun.sh
+EOF
+    chmod 755 /etc/init.d/ssr-bash-python
+    chmod +x /etc/init.d/ssr-bash-python
+    cd /etc/init.d
+    update-rc.d ssr-bash-python defaults 95
+fi
+
+if [[ ${OS} == CentOS ]];then
+    echo "
+iptables-restore < /etc/iptables.up.rules
+bash /usr/local/shadowsocksr/logrun.sh
+" > /etc/rc.d/init.d/ssr-bash-python
+    chmod +x  /etc/rc.d/init.d/ssr-bash-python
+    echo "/etc/rc.d/init.d/ssr-bash-python" >> /etc/rc.d/rc.local
+    chmod +x /etc/rc.d/rc.local
+fi
+
+
 #Change CentOS7 Firewall
 if [[ ${OS} == CentOS && $CentOS_RHEL_version == 7 ]];then
     systemctl stop firewalld.service
