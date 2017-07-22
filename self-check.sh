@@ -35,19 +35,6 @@ if [ ! -f "/usr/local/shadowsocksr/stop.sh" ]; then
   echo "SSR Miss" >> /root/report.json
   exit
 fi
-#Network Test
-echo "############Intelnet Test" >> /root/report.json
-cd /root
-curl http://myip.ipip.net
-curl http://myip.ipip.net >> /root/report.json
-curl -o test.net https://www.google.com
-if [ ! -f "/root/test.net" ]; then
-  echo "Intelnet Error，请确认服务器是否联网"
-  echo "Intelnet Miss" >> /root/report.json
-  exit
-fi
-ping www.google.com -c 5 >> /root/report.json
-ping www.facebook.com -c 5 >> /root/report.json
 
 #Firewall
 echo "############Firewall test" >> report.json
