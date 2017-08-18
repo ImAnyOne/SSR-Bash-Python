@@ -34,13 +34,13 @@ ShadowsocksR多用户管理脚本（基于官方mujson版本）
 `cd /usr/local/ && rm -rf SSR-Bash-Python && git clone https://github.com/ImAnyOne/SSR-Bash-Python.git && cp SSR-Bash-Python/ssr /usr/local/bin/ssr`
 
 ## 安装 ##
-    wget -N --no-check-certificate https://raw.githubusercontent.com/ImAnyOne/SSR-Bash-Python/master/install.sh && bash install.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/wbdy95/SSR-Bash-Python/master/install.sh && bash install.sh
 
 ## 卸载 ##
-    wget -N --no-check-certificate https://raw.githubusercontent.com/ImAnyOne/SSR-Bash-Python/master/uninstall.sh && bash uninstall.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/wbdy95/SSR-Bash-Python/master/uninstall.sh && bash uninstall.sh
     
 ## 自检 ##
-    wget -N --no-check-certificate https://raw.githubusercontent.com/ImAnyOne/SSR-Bash-Python/master/self-check.sh && bash self-check.sh
+    wget -N --no-check-certificate https://raw.githubusercontent.com/wbdy95/SSR-Bash-Python/master/self-check.sh && bash self-check.sh
 
 ## 截图 ##
 ![https://raw.githubusercontent.com/ImAnyOne/SSR-Bash-Python/master/1.png](1.png)
