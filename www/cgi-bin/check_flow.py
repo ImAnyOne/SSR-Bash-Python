@@ -21,7 +21,7 @@ for x in json:
 	if(str(x[u"port"]) == str(getport)):
 		portexist=1
 		transfer_enable_int = int(x[u"transfer_enable"])/1024/1024;
-		d_int = int(x[u"d"])/1024/1024;
+		d_int = float(x[u"d"])/1024/1024;
 		transfer_unit = "MB"
 		d_unit = "MB"
 
